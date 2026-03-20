@@ -1,0 +1,28 @@
+[
+  {
+    "ContainingType": "PoultryVent_Backend.Controllers.SensorController",
+    "Method": "Get",
+    "RelativePath": "api/Sensor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PoultryVent_Backend.Controllers.SensorController",
+    "Method": "Post",
+    "RelativePath": "api/Sensor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "postSensor",
+        "Type": "PoultryVent_Backend.Models.Sensor",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

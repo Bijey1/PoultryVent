@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\PoultryVent\\PoultryVent-Backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{533FF67D-7F9E-A0CB-2351-69423BDBED1F}|PoultryVent-Backend\\PoultryVent-Backend.csproj|c:\\poultryvent\\poultryvent-backend\\poultryvent-backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{533FF67D-7F9E-A0CB-2351-69423BDBED1F}|PoultryVent-Backend\\PoultryVent-Backend.csproj|solutionrelative:poultryvent-backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{533FF67D-7F9E-A0CB-2351-69423BDBED1F}|PoultryVent-Backend\\PoultryVent-Backend.csproj|c:\\poultryvent\\poultryvent-backend\\poultryvent-backend\\controllers\\sensorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{533FF67D-7F9E-A0CB-2351-69423BDBED1F}|PoultryVent-Backend\\PoultryVent-Backend.csproj|solutionrelative:poultryvent-backend\\controllers\\sensorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{533FF67D-7F9E-A0CB-2351-69423BDBED1F}|PoultryVent-Backend\\PoultryVent-Backend.csproj|c:\\poultryvent\\poultryvent-backend\\poultryvent-backend\\models\\sensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{533FF67D-7F9E-A0CB-2351-69423BDBED1F}|PoultryVent-Backend\\PoultryVent-Backend.csproj|solutionrelative:poultryvent-backend\\models\\sensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{533FF67D-7F9E-A0CB-2351-69423BDBED1F}|PoultryVent-Backend\\PoultryVent-Backend.csproj|c:\\poultryvent\\poultryvent-backend\\poultryvent-backend\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{533FF67D-7F9E-A0CB-2351-69423BDBED1F}|PoultryVent-Backend\\PoultryVent-Backend.csproj|solutionrelative:poultryvent-backend\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{533FF67D-7F9E-A0CB-2351-69423BDBED1F}|PoultryVent-Backend\\PoultryVent-Backend.csproj|c:\\poultryvent\\poultryvent-backend\\poultryvent-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{533FF67D-7F9E-A0CB-2351-69423BDBED1F}|PoultryVent-Backend\\PoultryVent-Backend.csproj|solutionrelative:poultryvent-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\PoultryVent\\PoultryVent-Backend\\PoultryVent-Backend\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "PoultryVent-Backend\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\PoultryVent\\PoultryVent-Backend\\PoultryVent-Backend\\Properties\\launchSettings.json",
+              "RelativeToolTip": "PoultryVent-Backend\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-17T16:34:52.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Sensor.cs",
+              "DocumentMoniker": "C:\\PoultryVent\\PoultryVent-Backend\\PoultryVent-Backend\\Models\\Sensor.cs",
+              "RelativeDocumentMoniker": "PoultryVent-Backend\\Models\\Sensor.cs",
+              "ToolTip": "C:\\PoultryVent\\PoultryVent-Backend\\PoultryVent-Backend\\Models\\Sensor.cs",
+              "RelativeToolTip": "PoultryVent-Backend\\Models\\Sensor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T15:38:47.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SensorController.cs",
+              "DocumentMoniker": "C:\\PoultryVent\\PoultryVent-Backend\\PoultryVent-Backend\\Controllers\\SensorController.cs",
+              "RelativeDocumentMoniker": "PoultryVent-Backend\\Controllers\\SensorController.cs",
+              "ToolTip": "C:\\PoultryVent\\PoultryVent-Backend\\PoultryVent-Backend\\Controllers\\SensorController.cs",
+              "RelativeToolTip": "PoultryVent-Backend\\Controllers\\SensorController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T15:11:06.523Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\PoultryVent\\PoultryVent-Backend\\PoultryVent-Backend\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "PoultryVent-Backend\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\PoultryVent\\PoultryVent-Backend\\PoultryVent-Backend\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "PoultryVent-Backend\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T15:10:11.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\PoultryVent\\PoultryVent-Backend\\PoultryVent-Backend\\Program.cs",
+              "RelativeDocumentMoniker": "PoultryVent-Backend\\Program.cs",
+              "ToolTip": "C:\\PoultryVent\\PoultryVent-Backend\\PoultryVent-Backend\\Program.cs",
+              "RelativeToolTip": "PoultryVent-Backend\\Program.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwB4AAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T14:55:06.646Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
