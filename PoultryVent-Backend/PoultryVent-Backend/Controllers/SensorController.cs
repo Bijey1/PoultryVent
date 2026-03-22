@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PoultryVent_Backend.Models;
 
-
 namespace PoultryVent_Backend.Controllers
 {
-
     [ApiController]
     [Route("api/[controller]")]
     //URL Structure: api/Sensor
@@ -12,7 +10,9 @@ namespace PoultryVent_Backend.Controllers
     {
         public static Sensor latestReading = new Sensor //dynamic readings
         {
-            Temperature = 2 //initial value of sensor
+            Temperature = 1.0, //initial value of sensor
+            Humidity=2.0,
+            Ammonia = 3.0
         };
 
         [HttpGet] //Runs when i called a GET 
