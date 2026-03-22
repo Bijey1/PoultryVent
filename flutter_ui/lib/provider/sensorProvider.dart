@@ -9,11 +9,10 @@ class SensorProvider with ChangeNotifier {
   SensorReading? _latestSensor;
 
   SensorReading? get latestSensor => _latestSensor;
+  final url = Uri.parse("http://192.168.68.103:5052/api/Sensor"); //Mesh Wifi ip
 
   //fetch from backend
   Future<void> fetchSensor() async {
-    final url = Uri.parse("http://192.168.68.106:5052/api/Sensor");
-
     try {
       final response = await http.get(url);
 
@@ -30,9 +29,7 @@ class SensorProvider with ChangeNotifier {
 
   //fetch from backend
   Future<void> postSensor() async {
-    final url = Uri.parse("http://192.168.68.106:5052/api/Sensor");
-
-    final dataBody = {"Temperature": 200};
+    final dataBody = {"Temperature": 200, "Humidity": 300, "Ammonia": 400};
 
     try {
       final response = await http.post(

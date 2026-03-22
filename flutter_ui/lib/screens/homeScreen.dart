@@ -14,21 +14,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Timer? _timer;
-  /*
+
   @override
   void initState() {
     super.initState();
     final provider = context.read<SensorProvider>();
 
     // Initial fetch
-   // provider.fetchSensor();
+    // provider.fetchSensor();
 
     // Auto-fetch every 5 seconds
     _timer = Timer.periodic(Duration(seconds: 5), (_) {
       provider.fetchSensor();
     });
   }
-  */
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Text("No Data");
                     }
 
-                    return Text("Temperature: ${latestRead.temperature}");
+                    return Column(
+                      children: [
+                        Text("Temperature: ${latestRead.temperature}"),
+                        Text("Humidity: ${latestRead.humidity}"),
+                        Text("Ammonia: ${latestRead.ammonia}"),
+                      ],
+                    );
                   },
                 ),
                 Column(
