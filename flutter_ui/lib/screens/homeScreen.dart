@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Timer? _timer;
-
+  /*
   @override
   void initState() {
     super.initState();
@@ -28,49 +28,61 @@ class _HomeScreenState extends State<HomeScreen> {
       provider.fetchSensor();
     });
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'Inter',
+        textTheme: TextTheme(
+          bodySmall: TextStyle(fontWeight: FontWeight.w400), // Regular
+          bodyMedium: TextStyle(fontWeight: FontWeight.w500), // Medium
+          titleMedium: TextStyle(fontWeight: FontWeight.w600), // SemiBold
+          titleLarge: TextStyle(fontWeight: FontWeight.bold), // Bold
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 90, // default is ~56, so 100 is taller,
+          title: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Text(
+              "PoultryVent",
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+            ),
+          ),
+        ),
+
+        backgroundColor: Color(0xFFF9FAFB),
         body: SafeArea(
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Consumer<SensorProvider>(
-                  builder: (context, provider, child) {
-                    final latestRead = provider.latestSensor;
-                    if (latestRead == null) {
-                      return Text("No Data");
-                    }
-
-                    return Column(
+                Card(
+                  elevation: 4,
+                  color: Color(0xFFE6F4EA),
+                  margin: EdgeInsets.only(left: 35, right: 35, top: 5),
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      spacing: 10,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Temperature: ${latestRead.temperature}"),
-                        Text("Humidity: ${latestRead.humidity}"),
-                        Text("Ammonia: ${latestRead.ammonia}"),
-                      ],
-                    );
-                  },
-                ),
-                Column(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        context.read<SensorProvider>().fetchSensor();
-                      },
-                      child: Text("Get Data"),
-                    ),
+                        Text(
+                          "Air Quality Status",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
 
-                    ElevatedButton(
-                      onPressed: () {
-                        context.read<SensorProvider>().postSensor();
-                      },
-                      child: Text("Post Data"),
+                        Row(
+                          children: [Text("Optimal"), Icon(Icons.air_rounded)],
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),

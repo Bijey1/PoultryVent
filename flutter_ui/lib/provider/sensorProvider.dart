@@ -10,6 +10,7 @@ class SensorProvider with ChangeNotifier {
 
   SensorReading? get latestSensor => _latestSensor;
   final url = Uri.parse("http://192.168.68.103:5052/api/Sensor"); //Mesh Wifi ip
+  //:10.160.200.193 mobile phone hotspot
 
   //fetch from backend
   Future<void> fetchSensor() async {
