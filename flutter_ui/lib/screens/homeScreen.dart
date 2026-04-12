@@ -157,47 +157,55 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      spacing: 20,
+                Consumer<SensorProvider>(
+                  builder: (context, provider, child) {
+                    final temperature = provider.latestSensor?.temperature ?? 0;
+                    final humidity = provider.latestSensor?.humidity ?? 0;
+                    final ammonia = provider.latestSensor?.ammonia ?? 0;
+
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        sensorCards(
-                          Icons.thermostat_rounded,
-                          "Temperature",
-                          20.0,
-                          "temp",
+                        Column(
+                          spacing: 20,
+                          children: [
+                            sensorCards(
+                              Icons.thermostat_rounded,
+                              "Temperature",
+                              temperature,
+                              "temp",
+                            ),
+
+                            sensorCards(
+                              Icons.science_rounded,
+                              "Ammonia",
+                              ammonia,
+                              "ammonia",
+                            ),
+                          ],
                         ),
 
-                        sensorCards(
-                          Icons.science_rounded,
-                          "Ammonia",
-                          25.0,
-                          "ammonia",
+                        Column(
+                          spacing: 20,
+                          children: [
+                            sensorCards(
+                              Icons.water_drop_rounded,
+                              "Humidity",
+                              humidity,
+                              "humid",
+                            ),
+
+                            sensorCards(
+                              Icons.mode_fan_off_outlined,
+                              "Fan",
+                              20.0,
+                              "fan",
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-
-                    Column(
-                      spacing: 20,
-                      children: [
-                        sensorCards(
-                          Icons.water_drop_rounded,
-                          "Humidity",
-                          38.0,
-                          "humid",
-                        ),
-
-                        sensorCards(
-                          Icons.mode_fan_off_outlined,
-                          "Fan",
-                          20.0,
-                          "fan",
-                        ),
-                      ],
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ],
             ),
