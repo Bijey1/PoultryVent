@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Timer? _timer;
-  /*
+
   @override
   void initState() {
     super.initState();
@@ -23,12 +23,13 @@ class _HomeScreenState extends State<HomeScreen> {
     // Initial fetch
     // provider.fetchSensor();
 
-    // Auto-fetch every 5 seconds
-    _timer = Timer.periodic(Duration(seconds: 5), (_) {
+    // Auto-fetch every 1 seconds
+    _timer = Timer.periodic(Duration(seconds: 1), (_) {
       provider.fetchSensor();
+      //provider.countDown();
     });
   }
-*/
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -119,13 +120,28 @@ class _HomeScreenState extends State<HomeScreen> {
                         //Last part BELOW of card
 
                         //TEMP, HUMID, AMMON
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            buildStatusCard("Temperature", "Good"),
-                            buildStatusCard("Humidity", "Good"),
-                            buildStatusCard("Ammonia", "Good"),
-                          ],
+                        Consumer<SensorProvider>(
+                          builder: (context, provider, child) {
+                            final sensorStatus = provider.topSensor;
+
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                buildStatusCard(
+                                  "Temperature",
+                                  sensorStatus["temp"] ?? "Good",
+                                ),
+                                buildStatusCard(
+                                  "Humidity",
+                                  sensorStatus["humid"] ?? "Good",
+                                ),
+                                buildStatusCard(
+                                  "Ammonia",
+                                  sensorStatus["ammon"] ?? "Good",
+                                ),
+                              ],
+                            );
+                          },
                         ),
 
                         //GOOD GOOD CARDS BELOW
@@ -163,6 +179,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     final humidity = provider.latestSensor?.humidity ?? 0;
                     final ammonia = provider.latestSensor?.ammonia ?? 0;
 
+                    //TEST COUNTDOWN
+                    final count = provider.testing;
+
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -180,6 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Icons.science_rounded,
                               "Ammonia",
                               ammonia,
+                              //count,
                               "ammonia",
                             ),
                           ],
