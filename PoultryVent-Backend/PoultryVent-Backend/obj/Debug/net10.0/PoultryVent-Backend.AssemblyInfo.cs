@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PoultryVent-Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a8eac1d3caa10dfc5bde37ee8c5f163012d9fb0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f67adb03465f62c218a9d1e945bd54b8a9c6a03")]
 [assembly: System.Reflection.AssemblyProductAttribute("PoultryVent-Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PoultryVent-Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -129,15 +129,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 buildStatusCard(
                                   "Temperature",
-                                  sensorStatus["temp"] ?? "Good",
+                                  sensorStatus["temp"] ?? "Low",
                                 ),
                                 buildStatusCard(
                                   "Humidity",
-                                  sensorStatus["humid"] ?? "Good",
+                                  sensorStatus["humid"] ?? "Low",
                                 ),
                                 buildStatusCard(
                                   "Ammonia",
-                                  sensorStatus["ammon"] ?? "Good",
+                                  sensorStatus["ammon"] ?? "Low",
                                 ),
                               ],
                             );
@@ -179,6 +179,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     final humidity = provider.latestSensor?.humidity ?? 0;
                     final ammonia = provider.latestSensor?.ammonia ?? 0;
 
+                    final tempStatus = provider.topSensor["temp"];
+                    final humidStatus = provider.topSensor["humid"];
+                    final ammonStatus = provider.topSensor["ammon"];
+
                     //TEST COUNTDOWN
                     final count = provider.testing;
 
@@ -193,6 +197,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               "Temperature",
                               temperature,
                               "temp",
+                              tempStatus == "Low"
+                                  ? "primary"
+                                  : tempStatus == "Meduim"
+                                  ? "yellow"
+                                  : tempStatus == "High"
+                                  ? "red"
+                                  : "primary",
                             ),
 
                             sensorCards(
@@ -201,6 +212,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               ammonia,
                               //count,
                               "ammonia",
+                              ammonStatus == "Low"
+                                  ? "primary"
+                                  : ammonStatus == "Meduim"
+                                  ? "yellow"
+                                  : ammonStatus == "High"
+                                  ? "red"
+                                  : "primary",
                             ),
                           ],
                         ),
@@ -213,6 +231,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               "Humidity",
                               humidity,
                               "humid",
+                              humidStatus == "Low"
+                                  ? "primary"
+                                  : humidStatus == "Meduim"
+                                  ? "yellow"
+                                  : humidStatus == "High"
+                                  ? "red"
+                                  : "primary",
                             ),
 
                             sensorCards(
@@ -220,6 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               "Fan",
                               20.0,
                               "fan",
+                              "primary",
                             ),
                           ],
                         ),
@@ -240,6 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
     String name,
     double value,
     String type,
+    String color,
   ) {
     return Card(
       elevation: 5,
@@ -247,7 +274,9 @@ class _HomeScreenState extends State<HomeScreen> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
         side: BorderSide(
-          color: Colors.grey.shade400, // border color
+          color: color == "primary"
+              ? Colors.grey.shade400
+              : colors(color), // border color
           width: 1, // thickness
         ),
       ),
@@ -260,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(sensorIcon, color: colors("primary"), size: 40),
+              Icon(sensorIcon, color: colors(color), size: 40),
 
               SizedBox(height: 10),
               Text(
@@ -308,7 +337,13 @@ class _HomeScreenState extends State<HomeScreen> {
               condition,
               style: TextStyle(
                 fontSize: 14,
-                color: colors("primary"),
+                color: condition == "Low"
+                    ? colors("primary")
+                    : condition == "Meduim"
+                    ? colors("yellow")
+                    : condition == "High"
+                    ? colors("red")
+                    : colors("primary"),
                 fontWeight: fontW("meduim"),
               ),
             ),
@@ -323,6 +358,10 @@ class _HomeScreenState extends State<HomeScreen> {
       return Color(0xFF2F6B3F);
     } else if (whatColor == "second") {
       return Color(0xFFE6F4EA);
+    } else if (whatColor == "yellow") {
+      return Color(0xFFF59E0B);
+    } else if (whatColor == "red") {
+      return Color(0xFFEF4444);
     }
     return Colors.white;
   }

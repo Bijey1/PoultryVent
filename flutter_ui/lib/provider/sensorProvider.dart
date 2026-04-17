@@ -9,10 +9,15 @@ import 'dart:async';
 
 class SensorProvider with ChangeNotifier {
   SensorReading? _latestSensor;
+
+  String low = "Low";
+  String mid = "Meduim";
+  String high = "High";
+
   Map<String, String> _topSensor = {
-    "temp": "Good",
-    "humid": "Good",
-    "ammon": "Good",
+    "temp": "Low",
+    "humid": "Low",
+    "ammon": "Low",
   };
 
   //TESTING COUNTDOWN
@@ -28,11 +33,11 @@ class SensorProvider with ChangeNotifier {
     _testing--;
 
     if (_testing >= 26) {
-      _topSensor["ammon"] = "High";
+      _topSensor["ammon"] = high;
     } else if (_testing >= 11) {
-      _topSensor["ammon"] = "Moderate";
+      _topSensor["ammon"] = mid;
     } else {
-      _topSensor["ammon"] = "Good";
+      _topSensor["ammon"] = low;
     }
 
     notifyListeners();
@@ -41,6 +46,7 @@ class SensorProvider with ChangeNotifier {
   //fetch from backend
   final url = Uri.parse("http://10.110.170.193:5052/api/Sensor");
   // 10.110.170.193 april 16/04/2026 LAPTOP HOTSPOT NA NAKACONNECT SA OPOSIR
+
   Future<void> fetchSensor() async {
     try {
       final response = await http.get(url);
@@ -54,7 +60,7 @@ class SensorProvider with ChangeNotifier {
         topSensorCard(_latestSensor!);
 
         //Notification condition
-        if (_latestSensor!.ammonia >= 26 && !hasNotified) {
+        if (_latestSensor!.ammonia >= 50 && !hasNotified) {
           hasNotified = true;
 
           await notiService.showNotif(
@@ -64,7 +70,7 @@ class SensorProvider with ChangeNotifier {
         }
 
         // RESET when safe again
-        if (_latestSensor!.ammonia < 26) {
+        if (_latestSensor!.ammonia < 50) {
           hasNotified = false;
         }
       } else {
@@ -89,35 +95,35 @@ class SensorProvider with ChangeNotifier {
     double ammonia = current.ammonia;
 
     // 🌡️ TEMP
-    if (temp >= 35) {
-      _topSensor["temp"] = "High";
+    if (temp >= 40) {
+      _topSensor["temp"] = high;
     } else if (temp >= 31) {
-      _topSensor["temp"] = "Moderate";
+      _topSensor["temp"] = mid;
     } else {
-      _topSensor["temp"] = "Good";
+      _topSensor["temp"] = low;
     }
 
     // 💧 HUMIDITY
     if (humidity >= 81) {
-      _topSensor["humidity"] = "High";
+      _topSensor["humidity"] = high;
     } else if (humidity >= 71) {
-      _topSensor["humidity"] = "Moderate";
+      _topSensor["humidity"] = mid;
     } else {
-      _topSensor["humidity"] = "Good";
+      _topSensor["humidity"] = low;
     }
 
     // 🧪 AMMONIA
-    if (ammonia >= 26) {
-      _topSensor["ammon"] = "High";
-    } else if (ammonia >= 11) {
-      _topSensor["ammon"] = "Moderate";
+    if (ammonia >= 50) {
+      _topSensor["ammon"] = high;
+    } else if (ammonia >= 30) {
+      _topSensor["ammon"] = mid;
     } else {
-      _topSensor["ammon"] = "Good";
+      _topSensor["ammon"] = low;
     }
   }
 
   void setDefaultGood() {
-    _topSensor = {"temp": "Good", "humidity": "Good", "ammon": "Good"};
+    _topSensor = {"temp": low, "humidity": low, "ammon": low};
   }
 
   //post from backend
