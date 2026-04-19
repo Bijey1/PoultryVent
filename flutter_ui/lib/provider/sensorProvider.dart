@@ -143,7 +143,7 @@ class SensorProvider with ChangeNotifier {
   }
 
   void setDefaultGood() {
-    _topSensor = {"temp": tempComfort, "humidity": humLow, "ammon": gasLow};
+    _topSensor = {"temp": tempCool, "humidity": humLow, "ammon": gasLow};
   } //post from backend
 
   Future<void> postSensor() async {
