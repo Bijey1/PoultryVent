@@ -9,14 +9,26 @@ import 'dart:async';
 
 class SensorProvider with ChangeNotifier {
   SensorReading? _latestSensor;
+  // Labels per sensor type (Title Case)
+  String tempCool = "Cool";
+  String tempComfort = "Comfort";
+  String tempWarm = "Warm";
+  String tempHot = "Hot";
 
-  String low = "Low";
-  String mid = "Meduim";
-  String high = "High";
+  String humLow = "Low";
+  String humMid = "Moderate";
+  String humHigh = "High";
+  String humCritical = "Critical";
 
+  String gasLow = "Low";
+  String gasModerate = "Moderate";
+  String gasHigh = "High";
+  String gasCritical = "Critical";
+
+  // Map
   Map<String, String> _topSensor = {
-    "temp": "Low",
-    "humid": "Low",
+    "temp": "Cool",
+    "humidity": "Low",
     "ammon": "Low",
   };
 
@@ -31,7 +43,7 @@ class SensorProvider with ChangeNotifier {
 
   Future<void> countDown() async {
     _testing--;
-
+    /*
     if (_testing >= 26) {
       _topSensor["ammon"] = high;
     } else if (_testing >= 11) {
@@ -39,13 +51,14 @@ class SensorProvider with ChangeNotifier {
     } else {
       _topSensor["ammon"] = low;
     }
-
+*/
     notifyListeners();
   }
 
   //fetch from backend
   final url = Uri.parse("http://10.110.170.193:5052/api/Sensor");
   // 10.110.170.193 april 16/04/2026 LAPTOP HOTSPOT NA NAKACONNECT SA OPOSIR
+  //10.110.170.193
 
   Future<void> fetchSensor() async {
     try {
@@ -60,7 +73,7 @@ class SensorProvider with ChangeNotifier {
         topSensorCard(_latestSensor!);
 
         //Notification condition
-        if (_latestSensor!.ammonia >= 50 && !hasNotified) {
+        if (_latestSensor!.ammonia >= 30 && !hasNotified) {
           hasNotified = true;
 
           await notiService.showNotif(
@@ -70,7 +83,7 @@ class SensorProvider with ChangeNotifier {
         }
 
         // RESET when safe again
-        if (_latestSensor!.ammonia < 50) {
+        if (_latestSensor!.ammonia < 30) {
           hasNotified = false;
         }
       } else {
@@ -94,39 +107,45 @@ class SensorProvider with ChangeNotifier {
     double humidity = current.humidity;
     double ammonia = current.ammonia;
 
-    // 🌡️ TEMP
-    if (temp >= 40) {
-      _topSensor["temp"] = high;
-    } else if (temp >= 31) {
-      _topSensor["temp"] = mid;
+    //  TEMPERATURE
+    if (temp >= 28) {
+      _topSensor["temp"] = tempHot; //Hot
+    } else if (temp >= 24) {
+      _topSensor["temp"] = tempWarm; //Warm
+    } else if (temp >= 18) {
+      _topSensor["temp"] = tempComfort; //Comfort
     } else {
-      _topSensor["temp"] = low;
+      //Cool
+      _topSensor["temp"] = tempCool;
     }
 
-    // 💧 HUMIDITY
-    if (humidity >= 81) {
-      _topSensor["humidity"] = high;
-    } else if (humidity >= 71) {
-      _topSensor["humidity"] = mid;
+    //  HUMIDITY
+    if (humidity >= 80) {
+      _topSensor["humidity"] = humCritical;
+    } else if (humidity >= 60) {
+      _topSensor["humidity"] = humHigh;
+    } else if (humidity >= 50) {
+      _topSensor["humidity"] = humMid;
     } else {
-      _topSensor["humidity"] = low;
+      _topSensor["humidity"] = humLow;
     }
 
-    // 🧪 AMMONIA
-    if (ammonia >= 50) {
-      _topSensor["ammon"] = high;
-    } else if (ammonia >= 30) {
-      _topSensor["ammon"] = mid;
+    //  AMMONIA
+    if (ammonia >= 30) {
+      _topSensor["ammon"] = gasCritical;
+    } else if (ammonia >= 20) {
+      _topSensor["ammon"] = gasHigh;
+    } else if (ammonia >= 10) {
+      _topSensor["ammon"] = gasModerate;
     } else {
-      _topSensor["ammon"] = low;
+      _topSensor["ammon"] = gasLow;
     }
   }
 
   void setDefaultGood() {
-    _topSensor = {"temp": low, "humidity": low, "ammon": low};
-  }
+    _topSensor = {"temp": tempComfort, "humidity": humLow, "ammon": gasLow};
+  } //post from backend
 
-  //post from backend
   Future<void> postSensor() async {
     final dataBody = {"Temperature": 200, "Humidity": 300, "Ammonia": 400};
 

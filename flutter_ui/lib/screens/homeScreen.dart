@@ -129,11 +129,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 buildStatusCard(
                                   "Temperature",
-                                  sensorStatus["temp"] ?? "Low",
+                                  sensorStatus["temp"] ?? "Cool",
                                 ),
                                 buildStatusCard(
                                   "Humidity",
-                                  sensorStatus["humid"] ?? "Low",
+                                  sensorStatus["humidity"] ?? "Moderate",
                                 ),
                                 buildStatusCard(
                                   "Ammonia",
@@ -180,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     final ammonia = provider.latestSensor?.ammonia ?? 0;
 
                     final tempStatus = provider.topSensor["temp"];
-                    final humidStatus = provider.topSensor["humid"];
+                    final humidStatus = provider.topSensor["humidity"];
                     final ammonStatus = provider.topSensor["ammon"];
 
                     //TEST COUNTDOWN
@@ -197,11 +197,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               "Temperature",
                               temperature,
                               "temp",
-                              tempStatus == "Low"
+                              tempStatus == "Cool"
                                   ? "primary"
-                                  : tempStatus == "Meduim"
+                                  : tempStatus == "Comfot"
+                                  ? "lGreen"
+                                  : tempStatus == "Warm"
                                   ? "yellow"
-                                  : tempStatus == "High"
+                                  : tempStatus == "Hot"
                                   ? "red"
                                   : "primary",
                             ),
@@ -214,9 +216,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               "ammonia",
                               ammonStatus == "Low"
                                   ? "primary"
-                                  : ammonStatus == "Meduim"
-                                  ? "yellow"
+                                  : ammonStatus == "Moderate"
+                                  ? "lGreen"
                                   : ammonStatus == "High"
+                                  ? "yellow"
+                                  : ammonStatus == "Critical"
                                   ? "red"
                                   : "primary",
                             ),
@@ -233,9 +237,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               "humid",
                               humidStatus == "Low"
                                   ? "primary"
-                                  : humidStatus == "Meduim"
-                                  ? "yellow"
+                                  : humidStatus == "Moderate"
+                                  ? "lGreen"
                                   : humidStatus == "High"
+                                  ? "yellow"
+                                  : humidStatus == "Critical"
                                   ? "red"
                                   : "primary",
                             ),
@@ -274,9 +280,8 @@ class _HomeScreenState extends State<HomeScreen> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
         side: BorderSide(
-          color: color == "primary"
-              ? Colors.grey.shade400
-              : colors(color), // border color
+          color: Colors.grey.shade400,
+          // border color
           width: 1, // thickness
         ),
       ),
@@ -315,53 +320,90 @@ class _HomeScreenState extends State<HomeScreen> {
 
   //Top Card Status Cards
   Widget buildStatusCard(String sensorType, String condition) {
-    return Column(
-      spacing: 7,
-      children: [
-        Text(
-          sensorType,
-          style: TextStyle(fontSize: 14, fontWeight: fontW("meduim")),
-        ),
-        Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(100),
+    return Expanded(
+      child: Column(
+        spacing: 7,
+        children: [
+          Text(
+            sensorType,
+            style: TextStyle(fontSize: 14, fontWeight: fontW("meduim")),
           ),
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 15.0,
-              right: 15,
-              top: 3,
-              bottom: 3,
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(100),
             ),
-            child: Text(
-              condition,
-              style: TextStyle(
-                fontSize: 14,
-                color: condition == "Low"
-                    ? colors("primary")
-                    : condition == "Meduim"
-                    ? colors("yellow")
-                    : condition == "High"
-                    ? colors("red")
-                    : colors("primary"),
-                fontWeight: fontW("meduim"),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                minWidth: 60,
+                maxWidth: 100, // prevents overflow
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12, // slightly reduced for balance
+                  vertical: 3,
+                ),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    condition,
+                    maxLines: 1,
+                    softWrap: false,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: getConditionColor(sensorType, condition),
+                      fontWeight: fontW("meduim"),
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
+  }
+
+  Color getConditionColor(String sensorType, String condition) {
+    final value = condition.toLowerCase().trim();
+
+    //  TEMPERATURE GROUP
+    if (sensorType == "Temperature") {
+      if (value == "cool") return colors("primary"); // safe
+      if (value == "comfort") return colors("lGreen"); // normal
+      if (value == "warm") return colors("yellow"); // warning
+      if (value == "hot") return colors("red"); // danger
+    }
+
+    //  HUMIDITY GROUP
+    if (sensorType == "Humidity") {
+      if (value == "low") return colors("primary"); // safe
+      if (value == "moderate") return colors("lGreen"); // normal
+      if (value == "high") return colors("yellow"); // warning
+      if (value == "critical") return colors("red"); // danger
+    }
+
+    if (sensorType == "Ammonia") {
+      if (value == "low") return colors("primary"); // safe
+      if (value == "moderate") return colors("lGreen"); // normal
+      if (value == "high") return colors("yellow"); // warning
+      if (value == "critical") return colors("red"); // danger
+    }
+
+    // default fallback
+    return colors("primary");
   }
 
   Color colors(String whatColor) {
     if (whatColor == "primary") {
-      return Color(0xFF2F6B3F);
+      return Color(0xFF2F6B3F); // safe (cool / low)
     } else if (whatColor == "second") {
-      return Color(0xFFE6F4EA);
+      return Color(0xFFE6F4EA); // KEEP AS IS
     } else if (whatColor == "yellow") {
-      return Color(0xFFF59E0B);
+      return Color(0xFFF59E0B); // darker / stronger warning (high)
+    } else if (whatColor == "lGreen") {
+      return Color(0xFF5FA46A); // new: soft / moderate state
     } else if (whatColor == "red") {
-      return Color(0xFFEF4444);
+      return Color(0xFFDC2626); // critical
     }
     return Colors.white;
   }
